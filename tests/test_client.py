@@ -34,7 +34,7 @@ class TestClient(unittest.TestCase):
             ['mock-schema'], 
             ['mock_table'],
             {
-                'mock-schema.mock_table': [
+                ('mock-schema', 'mock_table'): [
                     { 'name': 'double_field', 'type': Double },
                     { 'name': 'double_infinity', 'type': Double },
                     { 'name': 'float_field', 'type': Float },
@@ -79,7 +79,7 @@ class TestClient(unittest.TestCase):
             ['mock-schema'], 
             ['mock_table'],
             {
-                'mock-schema.mock_table': [
+                ('mock-schema', 'mock_table'): [
                     { 'name': 'string_field', 'type': String(50) },
                     { 'name': 'float_field', 'type': Float },
                     { 'name': 'float_none', 'type': Float },
@@ -171,7 +171,7 @@ class TestClient(unittest.TestCase):
             ['mock-schema'], 
             ['mock_table'],
             {
-                'mock-schema.mock_table': [
+                ('mock-schema', 'mock_table'): [
                     { 'name': 'string_field', 'type': String(50) },
                 ],
             },

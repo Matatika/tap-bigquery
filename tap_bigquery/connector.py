@@ -167,6 +167,7 @@ class BigQueryConnector(SQLConnector):
         schema_name: str,
         table_name: str,
         is_view: bool,  # noqa: FBT001
+        **kwargs: dict[str, t.Any],  # noqa: ARG002
     ) -> CatalogEntry:
         """Create `CatalogEntry` object for the given table or a view.
 
