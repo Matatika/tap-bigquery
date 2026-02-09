@@ -9,7 +9,7 @@ import typing as t
 import sqlalchemy
 from singer_sdk import SQLConnector
 from singer_sdk import typing as th  # JSON schema typing helpers
-from singer_sdk._singerlib import CatalogEntry, MetadataMapping, Schema
+from singer_sdk.singerlib import CatalogEntry, MetadataMapping, Schema
 from sqlalchemy_bigquery import (
     ARRAY,
     FLOAT,

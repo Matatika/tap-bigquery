@@ -8,7 +8,7 @@ from sqlalchemy import create_mock_engine, engine
 from sqlalchemy.types import String, Double, Float
 from sqlalchemy_bigquery import ARRAY
 
-from singer_sdk._singerlib import Catalog, CatalogEntry
+from singer_sdk.singerlib import Catalog, CatalogEntry
 from tap_bigquery.tap import TapBigQuery
 from tap_bigquery.client import BigQueryConnector
 
