@@ -157,6 +157,33 @@ class BigQueryConnector(SQLConnector):
             return jsonschema.type_dict
         return super().to_jsonschema_type(sql_type)
 
+    def discover_catalog_entries(self, **kwargs: dict[str, t.Any]) -> list[dict]:  # noqa: ARG002
+        """Return a list of catalog entries from discovery.
+
+        Returns:
+            The discovered catalog entries as a list.
+        """
+        result: list[dict] = []
+        engine = self._engine
+        inspected = sqlalchemy.inspect(engine)
+        for schema_name in self.get_schema_names(engine, inspected):
+            # Iterate through each table and view
+            for table_name, is_view in self.get_object_names(
+                engine,
+                inspected,
+                schema_name,
+            ):
+                catalog_entry = self.discover_catalog_entry(
+                    engine,
+                    inspected,
+                    schema_name,
+                    table_name,
+                    is_view,
+                )
+                result.append(catalog_entry.to_dict())
+
+        return result
+
     # TODO this only needs a column filtering capability in the singer-sdk
     # as sqlalchemy returns additional columns on bigquery for all the json
     # it has natively understood.
@@ -296,4 +323,4 @@ class BigQueryConnector(SQLConnector):
             return self.config["filter_schemas"]
         return super().get_schema_names(engine, inspected)
 
-__all__ = ["TapBigQuery", "BigQueryConnector", "BigQueryStream"]
+__all__ = ["BigQueryConnector", "BigQueryStream", "TapBigQuery"]
