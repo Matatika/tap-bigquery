@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 from typing import List
-from sqlalchemy import Inspector, Column
+
+from sqlalchemy import Column, Inspector
+
 
 class MockInspector(Inspector):
     def __init__(
@@ -27,7 +29,16 @@ class MockInspector(Inspector):
         return []
 
     def get_columns(self, table_name: str, schema: str) -> dict[str, Column]:
-        return self.table_columns[schema + '.' + table_name]
+        return self.table_columns[(schema, table_name)]
 
     def get_pk_constraint(self, table_name: str, schema: str) -> dict:
         return {}
+
+    def get_multi_pk_constraint(self, *args, **kwargs):
+        return {}
+
+    def get_multi_indexes(self, *args, **kwargs):
+        return {}
+
+    def get_multi_columns(self, *args, **kwargs):
+        return self.table_columns
